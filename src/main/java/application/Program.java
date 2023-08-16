@@ -18,8 +18,10 @@ public class Program {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
 		
-		Pessoa p = em.find(Pessoa.class, 2);
-		
+		Pessoa p = em.find(Pessoa.class, 2); // PARA EXCLUIR ALGUM DADO, ELE TEM QUE ESTAR MONITORADO (FEITO A BUSCA  ANTERIORMENTE) OU TER SIDO INCLUIDA NESSE MOMENTO
+		em.getTransaction().begin();
+		em.remove(p); // E PRECISA CONFIRMAR A TRANSAÇÃO TBM
+		em.getTransaction().commit();
 		System.out.println(p);
 		
 		System.out.println("Pronto!");
