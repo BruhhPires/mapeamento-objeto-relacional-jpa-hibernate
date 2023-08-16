@@ -18,15 +18,13 @@ public class Program {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
 		
-		// QUANDO O JPA FAZ UMA OPERAÇÃO QUE NÃO É UMA SIMPLES LEITURA, ELE PRECISA DE UMA TRANSAÇÃO.
-		em.getTransaction().begin(); // INICIA A TRANSAÇÃO
+		Pessoa p = em.find(Pessoa.class, 2);
 		
-		em.persist(p1); // OPERAÇÃO DE INCLUSÃO DE DADOS NO BD
-		em.persist(p2); // OPERAÇÃO DE INCLUSÃO DE DADOS NO BD
-		em.persist(p3); // OPERAÇÃO DE INCLUSÃO DE DADOS NO BD
+		System.out.println(p);
 		
-		em.getTransaction().commit(); // CONFIRMA AS ALTERAÇÕES
 		System.out.println("Pronto!");
+		em.close();
+		emf.close();
 
 	}
 
